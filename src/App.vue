@@ -157,7 +157,7 @@ import TennisMatchHist from './components/TennisMatchHist.vue';
 			</section>
 			<div class="flex flex-col border-2 border-slate-200 bg-slate-100 rounded-b-xl divide-y-2 divide-dashed w-matches h-matches overflow-y-scroll">
 				<section v-for="i in spSet" :key="i">
-					<div class="grid gap-4 grid-cols-3 justify-items-center text-slate-600 py-2">
+					<div class="grid gap-4 grid-cols-3 justify-items-center text-slate-600 py-2 text-sm">
 						<div class="font-bold">{{ i.team_1 }}</div>
 						<section class="flex gap-2">
 							<span>{{ i.running_score }}</span>
