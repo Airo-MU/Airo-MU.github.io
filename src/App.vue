@@ -132,11 +132,11 @@ import TennisMatchHist from './components/TennisMatchHist.vue';
 					<section class="flex flex-col gap-4 w-matches">
 						<h1 class="font-bold">{{ x }}</h1>
 						<div class="grid gap-4 grid-cols-3 px-4 py-3 border-x-2 border-t-2 rounded-t-xl text-lg" style="background-color: #FFC758; border-color: #FFC758;">
-							<div v-for="(k, ind) in vi" :key="k" class="font-bold">{{ ind }}</div>
+							<div v-for="(k, ind) in vi[0]" :key="k" class="font-bold">{{ ind }}</div>
 						</div>
 					</section>
 					<div class="mb-6 flex flex-col border-2 border-slate-200 bg-slate-100 rounded-b-xl divide-y-2 divide-dashed w-matches h-matches overflow-y-scroll">
-						<section v-for="st in v" :key="st">
+						<section v-for="st in vi" :key="st">
 							<div class="grid gap-4 grid-cols-3 text-slate-600 px-4 py-2">
 								<div v-for="i in st" :key="i">{{ i }}</div>
 							</div>
@@ -215,7 +215,7 @@ export default {
 				this.spSet = res.data
 			})
 		axios
-			.get("https://raw.githubusercontent.com/Airo-MU/matches/master/cricket/test.json")
+			.get("https://raw.githubusercontent.com/Airo-MU/matches/master/cricket/standings.json")
 			.then((res) => {
 				this.set = res.data
 			})
