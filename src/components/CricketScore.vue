@@ -18,7 +18,7 @@
 			</section>
 		</section>
 	</div>
-	{{ winner }}
+	<h1 class="font-bold">{{ winner }}</h1>
 </template>
 
 <script>

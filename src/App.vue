@@ -113,13 +113,13 @@ import TennisMatchHist from './components/TennisMatchHist.vue';
 		<div class="flex flex-col gap-6 lg:gap-10 h-scores w-sc lg:w-full px-6 lg:px-12 py-6 bg-slate-200 border-r-2 border-slate-200 overflow-y-scroll">
 			<div class="flex flex-col gap-3 lg:gap-6">
 				<h1 class="font-bold text-slate-500">Recent</h1>
-				<CricketScore :t1="spSet[0].bat_team" :t2="spSet[0].bowl_team" :score1="spSet[0].t1_score" :score2="spSet[0].t2_score" :overs="spSet[0].overs" v-if="cricket" />
+				<CricketScore :t1="spSet[0].bat_team" :t2="spSet[0].bowl_team" :score1="spSet[0].t1_score" :score2="spSet[0].t2_score" :overs="spSet[0].overs" :winner="spSet[0].winner" v-if="cricket" />
 				<TennisScore :t1="spSet[0].team_1" :t2="spSet[0].team_2" :score="spSet[0].running_score" :set="spSet[0].set" v-else-if="tennis || tt" />
 				<ScoreCard :t1="spSet[0].team_1" :t2="spSet[0].team_2" :score="spSet[0].running_score" v-else />
 			</div>
 			<div class="flex flex-col gap-3 lg:gap-6">
 				<h1 class="font-bold text-slate-500">Last Match</h1>
-				<CricketScore :t1="spSet[1].bat_team" :t2="spSet[1].bowl_team" :score1="spSet[1].t1_score" :score2="spSet[1].t2_score" :overs="spSet[1].overs" v-if="cricket" />
+				<CricketScore :t1="spSet[1].bat_team" :t2="spSet[1].bowl_team" :score1="spSet[1].t1_score" :score2="spSet[1].t2_score" :overs="spSet[1].overs" :winner="spSet[1].winner" v-if="cricket" />
 				<TennisScore :t1="spSet[1].team_1" :t2="spSet[1].team_2" :score="spSet[1].running_score" :set="spSet[1].set" v-else-if="tennis || tt" />
 				<ScoreCard :t1="spSet[1].team_1" :t2="spSet[1].team_2" :score="spSet[1].running_score" v-else />
 			</div>
@@ -127,18 +127,21 @@ import TennisMatchHist from './components/TennisMatchHist.vue';
 
 		<div class="flex flex-col gap-6 h-scores p-6 lg:p-8 border-r-2 border-slate-200 bg-slate-50 xl:bg-white">
 			<h1 class="font-bold">Standings</h1>
-			<section>
-				<section class="flex flex-col w-matches">
-					<div class="grid gap-4 grid-cols-3 px-4 py-3 border-x-2 border-t-2 rounded-t-xl text-lg" style="background-color: #FFC758; border-color: #FFC758;">
-						<div v-for="(k, ind) in set[0]" :key="k" class="font-bold">{{ ind }}</div>
-					</div>
-				</section>
-				<div class="flex flex-col border-2 border-slate-200 bg-slate-100 rounded-b-xl divide-y-2 divide-dashed w-matches h-matches overflow-y-scroll">
-					<section v-for="st in set" :key="st">
-						<div class="grid gap-4 grid-cols-3 text-slate-600 px-4 py-2">
-							<div v-for="i in st" :key="i">{{ i }}</div>
+			<section class="overflow-y-scroll" v-for="v in set" :key="v">
+				<div v-for="(vi, x) in v" :key="vi">
+					<section class="flex flex-col gap-4 w-matches">
+						<h1 class="font-bold">{{ x }}</h1>
+						<div class="grid gap-4 grid-cols-3 px-4 py-3 border-x-2 border-t-2 rounded-t-xl text-lg" style="background-color: #FFC758; border-color: #FFC758;">
+							<div v-for="(k, ind) in vi" :key="k" class="font-bold">{{ ind }}</div>
 						</div>
 					</section>
+					<div class="mb-6 flex flex-col border-2 border-slate-200 bg-slate-100 rounded-b-xl divide-y-2 divide-dashed w-matches h-matches overflow-y-scroll">
+						<section v-for="st in v" :key="st">
+							<div class="grid gap-4 grid-cols-3 text-slate-600 px-4 py-2">
+								<div v-for="i in st" :key="i">{{ i }}</div>
+							</div>
+						</section>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -212,7 +215,7 @@ export default {
 				this.spSet = res.data
 			})
 		axios
-			.get("https://raw.githubusercontent.com/Airo-MU/matches/master/cricket/standings.json")
+			.get("https://raw.githubusercontent.com/Airo-MU/matches/master/cricket/test.json")
 			.then((res) => {
 				this.set = res.data
 			})
