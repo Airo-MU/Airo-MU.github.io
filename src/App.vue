@@ -177,7 +177,7 @@ export default {
 		return {
 			expand: false,
 			event: "Cricket",
-			link: "https://cricheroes.in/tournament/424723/AIRO-2K22",
+			link: "https://cricheroes.in/tournament/641440/AIRO-2k23/live-matches/1",
 			set: [],
 			spSet: [],
 			sportname: [
